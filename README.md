@@ -6,14 +6,14 @@ Project consists of two directories: api and frontend
 
 Api is build with express and mongoose and uses [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc) for generating Swagger documentation from commentaries in code.
 
-requirements:
+Requirements:
 
 - nodejs v10.8.0
 - mongodb v4.0.0
 
 ### Startup
 
-Firsly, you need to specify your mongodb connection URI inside .env file in the root of project.
+Firstly, you need to specify your mongodb connection URI inside .env file in the root of project.
 After that you can start project by running this commands:
 
 ```bash
@@ -26,7 +26,7 @@ After that you will see message saying that API is up on port 3000. You can also
 
 ## Frontend
 
-Frontend is build on Vue with help of vue-cli. It was my first Vue project so I needed some boilerplate code to start with. It also uses bootstrap 4 for some styling.
+Frontend is build on Vue with help of vue-cli. It was my first Vue project so I needed some boilerplate code to start with and build it in one day. It also uses bootstrap 4 for some styling.
 
 ### Startup
 
