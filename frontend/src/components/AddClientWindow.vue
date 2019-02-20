@@ -18,7 +18,11 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <ClientForm submitText="Create client" @submitForm="submitForm"/>
+                <ClientForm
+                  :requestErrors="errors"
+                  submitText="Create client"
+                  @submitForm="submitForm"
+                />
               </div>
             </div>
           </div>
@@ -37,19 +41,28 @@ export default {
   name: "add-client-window",
   components: { ClientForm },
   props: { showModal: { type: Boolean } },
+  data() {
+    return { errors: {} };
+  },
   methods: {
     toggleModal: function() {
       this.$emit("toggleModal");
     },
     submitForm: function(data) {
-      axios.post("http://127.0.0.1:3000/client", data).then(newData => {
-        this.$emit("loadClients");
-        store.alerts.pushAlert({
-          message: `Added new client: ${newData.data.client.name}`,
-          class: "alert-success"
+      axios
+        .post("http://127.0.0.1:3000/client", data)
+        .then(newData => {
+          this.errors = {};
+          this.$emit("loadClients");
+          store.alerts.pushAlert({
+            message: `Added new client: ${newData.data.client.name}`,
+            class: "alert-success"
+          });
+          this.toggleModal();
+        })
+        .catch(error => {
+          this.errors = error.response.data.fields;
         });
-        this.toggleModal();
-      });
     }
   }
 };

@@ -16,6 +16,7 @@
         </div>
         <div class="modal-body">
           <ClientForm
+            :requestErrors="errors"
             submitText="Save client"
             @loadClients="loadClients"
             :initialValues="client"
@@ -36,6 +37,11 @@ export default {
   name: "add-client-window",
   components: { ClientForm },
   props: { showModal: { type: Boolean }, client: { type: Object } },
+  data() {
+    return {
+      errors: {}
+    };
+  },
   methods: {
     loadClients: function() {
       this.$emit("loadClients");
@@ -53,6 +59,9 @@ export default {
             class: "alert-info"
           });
           this.toggleModal();
+        })
+        .catch(error => {
+          this.errors = error.response.data.fields;
         });
     }
   }

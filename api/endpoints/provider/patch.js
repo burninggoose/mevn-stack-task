@@ -45,5 +45,15 @@ module.exports = function(req, res) {
         if (!provider) res.status(400).json({ message: "Invalid ID" });
         res.json({ provider });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        if (err.name === "MongoError" && err.code === 11000) {
+          res.status(400).send({
+            error: true,
+            fields: { name: "Provider name already exists" }
+          });
+        } else {
+          console.log(err);
+          res.status(500).send({ error: true, message: "Server error" });
+        }
+      });
 };

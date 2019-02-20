@@ -8,7 +8,6 @@ To get API server running locally:
 
 - Install NodeJS ([instructions](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages))
 - Install MongoDB Community Edition ([instructions](https://docs.mongodb.com/manual/installation/#tutorials)) and run it by executing `mongod`
-- Go to api folder `cd api`
 - Install required dependencies `npm install`
 - `npm start` to run the local server
 

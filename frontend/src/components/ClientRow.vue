@@ -4,7 +4,7 @@
     <td>{{client.email}}</td>
     <td>{{client.phone}}</td>
     <td>{{`${client.providers.map(provider => {return provider.name})}`}}</td>
-    <td>
+    <td class="text-right">
       <button class="btn btn-info" @click="editClient">Edit</button>
     </td>
     <td>

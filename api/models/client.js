@@ -36,10 +36,12 @@ const ClientSchema = new mongoose.Schema(
   {
     id: { type: Number, unique: true },
     name: {
-      type: String
+      type: String,
+      unique: true
     },
     email: {
-      type: String
+      type: String,
+      unique: true
     },
     phone: {
       type: String

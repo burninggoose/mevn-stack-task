@@ -1,5 +1,6 @@
 const Client = require("../../models/client");
 const Provider = require("../../models/provider");
+const getErrorField = require("../../utils/getErrorField");
 
 /**
  * @swagger
@@ -48,5 +49,28 @@ module.exports = function(req, res) {
         res.json({ client, providers });
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      if (err.name === "MongoError" && err.code === 11000) {
+        const field = getErrorField(err.message);
+        switch (field) {
+          case "email":
+            return res.status(400).send({
+              error: true,
+              fields: { email: "Cleint email already exists" }
+            });
+          case "name":
+            return res
+              .status(400)
+              .send({
+                error: true,
+                fields: { name: "Client name already exists" }
+              });
+          default:
+            break;
+        }
+      } else {
+        console.log(err);
+        res.status(500).send({ error: true, message: "Server error" });
+      }
+    });
 };

@@ -1,14 +1,17 @@
 <template>
   <div>
-    <ProviderCreateForm @submitForm="createProvider"/>
-    <ProviderField
-      v-for="provider in providers"
-      @switchProvider="switchProvider"
-      @reloadProviders="getProviders"
-      @loadClients="loadClients"
-      v-bind:provider="provider"
-      :key="provider.id"
-    />
+    <ProviderCreateForm :requestErrors="errors" @submitForm="createProvider"/>
+    <table style=" border-collapse:separate; 
+  border-spacing: 0 10px;">
+      <ProviderField
+        v-for="provider in providers"
+        @switchProvider="switchProvider"
+        @reloadProviders="getProviders"
+        @loadClients="loadClients"
+        v-bind:provider="provider"
+        :key="provider.id"
+      />
+    </table>
   </div>
 </template>
 
@@ -23,7 +26,7 @@ export default {
   components: { ProviderField, ProviderCreateForm },
   props: { activeProviders: { type: Array } },
   data: function() {
-    return { providers: null };
+    return { providers: null, errors: {} };
   },
   mounted: function() {
     this.getProviders();
@@ -45,11 +48,15 @@ export default {
       return axios
         .post("http://127.0.0.1:3000/provider", data)
         .then(newData => {
+          this.errors = {};
           store.alerts.pushAlert({
             message: `Created provider: ${newData.data.provider.name}`,
             class: "alert-success"
           });
           this.getProviders();
+        })
+        .catch(error => {
+          this.errors = error.response.data.fields;
         });
     },
     getProviders: function() {

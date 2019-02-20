@@ -1,17 +1,18 @@
 <template>
   <tr>
     <td v-if="editingStatus" class="col text-left">
-      <div class="input-group mb-3">
-        <input class="form-control" v-model="name" type="text" name="name">
+      <div class="input-group">
+        <input class="form-control form-control-sm" v-model="name" type="text" name="name">
         <div class="input-group-append">
           <button
             @click="checkForm"
             type="submit"
-            class="btn btn-success"
+            class="btn btn-sm btn-success"
             :disabled="this.editLoading"
           >{{this.editLoading ? 'Loading' : 'Save'}}</button>
         </div>
       </div>
+      <small style="color: red" v-if="errors.name">{{errors.name}}</small>
     </td>
     <td v-else class="col text-left">
       <label class="checkbox-container">
@@ -29,13 +30,13 @@
     <td class="col text-right">
       <button
         @click="switchEditing"
-        class="btn btn-info"
+        class="btn btn-sm btn-info"
       >{{this.editingStatus ? 'Cancel' : 'Edit' }}</button>
     </td>
     <td class="col text-right">
       <button
         @click="deleteProvider"
-        class="btn btn-danger"
+        class="btn btn-sm btn-danger"
         :disabled="deleteLoading"
       >{{deleteLoading ? 'Loading' : 'Delete'}}</button>
     </td>
@@ -81,6 +82,11 @@ export default {
             message: `Edited provider: ${newData.data.provider.name}`,
             class: "alert-info"
           });
+          this.editLoading = false;
+        })
+        .catch(error => {
+          this.errors = error.response.data.fields;
+          console.log(this.errors);
           this.editLoading = false;
         });
     },

@@ -24,7 +24,8 @@ const ProviderSchema = new mongoose.Schema(
       unique: true
     },
     name: {
-      type: String
+      type: String,
+      unique: true
     }
   },
   { versionKey: false }

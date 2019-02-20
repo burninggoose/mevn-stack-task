@@ -16,23 +16,27 @@
     <div class="container">
       <div class="row">
         <div class="col text-left">
-          <h2>Clients</h2>
+          <h1>Clients</h1>
         </div>
         <div class="col text-right">
-          <button class="btn btn-success" @click="toggleCreateClientModal">Add client</button>
+          <button
+            style="margin-top: 10px"
+            class="btn btn-success align-bottom"
+            @click="toggleCreateClientModal"
+          >Add client</button>
         </div>
       </div>
       <div class="row">
-        <div class="col col-xs-12">
+        <div class="col-12">
           <table class="table">
             <thead>
               <tr>
-                <td scope="col">Name</td>
-                <td scope="col">Email</td>
-                <td scope="col">Phone</td>
-                <td scope="col">Providers</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Phone</td>
+                <td>Providers</td>
                 <td/>
-                <td/>
+                <td colspan="2">Actions</td>
               </tr>
               <tr/>
             </thead>

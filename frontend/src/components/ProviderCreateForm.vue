@@ -1,5 +1,9 @@
 <template>
   <form id="client-form" @submit="checkForm">
+    <small
+      style="color: red"
+      v-if="requestErrors.name || errors.name"
+    >{{requestErrors.name || errors.name}}</small>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">Providers</span>
@@ -12,7 +16,6 @@
           type="submit"
         >{{this.loadingCreate ? 'Loading' : "Create provider"}}</button>
       </div>
-      <small style="color: red" v-if="errors.aname">{{errors.name}}</small>
     </div>
   </form>
 </template>
@@ -20,6 +23,7 @@
 <script>
 export default {
   name: "provider-form",
+  props: { requestErrors: { type: Object } },
   data() {
     return {
       errors: {
@@ -37,12 +41,11 @@ export default {
       const fields = {
         name: this.name
       };
-      this.errors.name = fields.name ? null : "Required";
+      this.errors.name = fields.name ? null : "Provider name required";
       if (!this.errors.name) {
         this.$emit("submitForm", fields);
       }
       this.loadingCreate = false;
-      this.name = null;
     }
   }
 };

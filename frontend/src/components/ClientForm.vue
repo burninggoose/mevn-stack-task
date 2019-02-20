@@ -1,27 +1,37 @@
 <template>
-  <div>
-    <div class="input-group mb-3">
+  <div class="text-center">
+    <small
+      style="color: red; marign-top: -10px"
+      class="text-center"
+      v-if="requestErrors.name || errors.name"
+    >{{requestErrors.name || errors.name}}</small>
+    <div class="input-group mb-2">
       <div class="input-group-prepend">
         <span class="input-group-text">Name</span>
       </div>
       <input class="form-control" type="text" name="name" id="name" v-model="name">
-      <small style="color: red" v-if="errors.name">{{errors.name}}</small>
     </div>
-
-    <div class="input-group mb-3">
+    <small
+      style="color: red"
+      v-if="requestErrors.email || errors.email"
+    >{{requestErrors.email || errors.email}}</small>
+    <div class="input-group mb-2">
       <div class="input-group-prepend">
         <span class="input-group-text">Email</span>
       </div>
       <input class="form-control" type="text" name="email" id="email" v-model="email">
-      <small style="color: red" v-if="errors.email">{{errors.email}}</small>
+      <br>
     </div>
-
-    <div class="input-group mb-3">
+    <small
+      style="color: red"
+      v-if="requestErrors.phone || errors.phone"
+    >{{requestErrors.phone || errors.phone}}</small>
+    <div class="input-group mb-2">
       <div class="input-group-prepend">
         <span class="input-group-text">Phone</span>
       </div>
       <input class="form-control" type="text" name="phone" id="text" v-model="phone">
-      <small style="color: red" v-if="errors.phone">{{errors.phone}}</small>
+      <br>
     </div>
     <ProvidersList
       @loadClients="loadClients"
@@ -41,7 +51,8 @@ export default {
   components: { ProvidersList },
   props: {
     initialValues: { type: Object },
-    submitText: { type: String }
+    submitText: { type: String },
+    requestErrors: { type: Object }
   },
   data() {
     return {
