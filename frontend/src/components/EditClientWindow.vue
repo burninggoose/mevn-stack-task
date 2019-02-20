@@ -16,7 +16,7 @@
         </div>
         <div class="modal-body">
           <ClientForm
-            submitText="Save"
+            submitText="Save client"
             @loadClients="loadClients"
             :initialValues="client"
             @submitForm="submitForm"
@@ -30,6 +30,7 @@
 <script>
 import ClientForm from "./ClientForm.vue";
 import axios from "axios";
+import store from "../store";
 
 export default {
   name: "add-client-window",
@@ -45,8 +46,12 @@ export default {
     submitForm: function(data) {
       axios
         .patch("http://127.0.0.1:3000/client/" + this.client.id, data)
-        .then(client => {
+        .then(newData => {
           this.$emit("loadClients");
+          store.alerts.pushAlert({
+            message: `Edited client: ${newData.data.client.name}`,
+            class: "alert-info"
+          });
           this.toggleModal();
         });
     }

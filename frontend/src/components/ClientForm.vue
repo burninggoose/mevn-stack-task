@@ -28,9 +28,9 @@
       @updateProviders="updateProviders"
       v-bind:activeProviders="providers"
     />
-    <p>
+    <div class="text-center">
       <button @click="checkForm" class="btn btn-success" type="submit">{{submitText}}</button>
-    </p>
+    </div>
   </div>
 </template>
 

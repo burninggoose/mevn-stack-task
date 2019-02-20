@@ -19,6 +19,7 @@
 
 <script>
 import axios from "axios";
+import store from "../store";
 
 export default {
   name: "client-row",
@@ -38,6 +39,10 @@ export default {
         .then(data => {
           this.$emit("loadClients");
           this.loading = false;
+          store.alerts.pushAlert({
+            message: `Deleted client: ${this.client.name}`,
+            class: "alert-danger"
+          });
         });
       e.preventDefault();
     }

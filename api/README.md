@@ -1,7 +1,3 @@
-# Test task for MEVN stack
-
-Project consists of two directories: api and frontend
-
 # API
 
 Api is build with express and mongoose and uses [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc) for generating Swagger documentation from commentaries in code.
@@ -22,23 +18,3 @@ Optionally:
 
 - `npm docs` to generate new swagger.json from commentaries in code.
 - change config.js up to your needs
-
-# Frontend
-
-Frontend is build on Vue with help of vue-cli. It was my first Vue project so I needed some boilerplate code to start with and build it in one day. It also uses bootstrap 4 for some styling.
-
-## Getting started
-
-First of all go to frontend folder: `cd frontend` and install dependensies: `npm install`
-
-Then:
-
-- Run in dev mode: `npm run dev`
-- Build production version: `npm run build`
-- Start local example with builded production version: `npm start`
-
-## To do
-
-1. Add validation
-2. Write smaller components for frontend
-3. Write tests for API

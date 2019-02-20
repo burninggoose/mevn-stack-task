@@ -7,11 +7,11 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const createCounters = require("./utils/createCounters");
-const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, ".env") });
+const config = require("./config");
+const morgan = require("morgan");
 
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect(config.MONGODB_URI, { useNewUrlParser: true })
   .then(createCounters)
   .catch(err => {
     console.log(err);
@@ -19,9 +19,12 @@ mongoose
   });
 
 app.use(cors());
+
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(bodyParser());
+
+app.use(morgan("combined"));
 
 app.use("/", router);
 

@@ -18,7 +18,7 @@
           <div class="container">
             <div class="row">
               <div class="col">
-                <ClientForm submitText="Create" @submitForm="submitForm"/>
+                <ClientForm submitText="Create client" @submitForm="submitForm"/>
               </div>
             </div>
           </div>
@@ -31,6 +31,7 @@
 <script>
 import ClientForm from "./ClientForm.vue";
 import axios from "axios";
+import store from "../store";
 
 export default {
   name: "add-client-window",
@@ -41,8 +42,12 @@ export default {
       this.$emit("toggleModal");
     },
     submitForm: function(data) {
-      axios.post("http://127.0.0.1:3000/client", data).then(client => {
+      axios.post("http://127.0.0.1:3000/client", data).then(newData => {
         this.$emit("loadClients");
+        store.alerts.pushAlert({
+          message: `Added new client: ${newData.data.client.name}`,
+          class: "alert-success"
+        });
         this.toggleModal();
       });
     }

@@ -16,6 +16,7 @@
 import axios from "axios";
 import ProviderField from "./ProviderField";
 import ProviderCreateForm from "./ProviderCreateForm";
+import store from "../store";
 
 export default {
   name: "providers-list",
@@ -43,7 +44,13 @@ export default {
     createProvider: function(data) {
       return axios
         .post("http://127.0.0.1:3000/provider", data)
-        .then(this.getProviders);
+        .then(newData => {
+          store.alerts.pushAlert({
+            message: `Created provider: ${newData.data.provider.name}`,
+            class: "alert-success"
+          });
+          this.getProviders();
+        });
     },
     getProviders: function() {
       return axios.get("http://127.0.0.1:3000/provider").then(data => {

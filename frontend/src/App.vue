@@ -12,6 +12,7 @@
       :client="editClientModal.client"
       @loadClients="loadClients"
     />
+    <Alerts/>
     <div class="container">
       <div class="row">
         <div class="col text-left">
@@ -56,9 +57,10 @@ import axios from "axios";
 import ClientRow from "./components/ClientRow";
 import AddClientWindow from "./components/AddClientWindow";
 import EditClientWindow from "./components/EditClientWindow";
+import Alerts from "./components/Alerts";
 
 export default {
-  components: { ClientRow, AddClientWindow, EditClientWindow },
+  components: { ClientRow, AddClientWindow, EditClientWindow, Alerts },
   name: "app",
   data() {
     return {

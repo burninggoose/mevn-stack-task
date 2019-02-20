@@ -44,6 +44,7 @@
 
 <script>
 import axios from "axios";
+import store from "../store";
 
 export default {
   name: "provider-field",
@@ -72,10 +73,14 @@ export default {
       this.editLoading = true;
       axios
         .patch("http://127.0.0.1:3000/provider/" + this.provider.id, data)
-        .then(() => {
+        .then(newData => {
           this.$emit("reloadProviders");
           this.$emit("loadClients");
           this.switchEditing();
+          store.alerts.pushAlert({
+            message: `Edited provider: ${newData.data.provider.name}`,
+            class: "alert-info"
+          });
           this.editLoading = false;
         });
     },
@@ -85,6 +90,10 @@ export default {
       axios
         .delete("http://127.0.0.1:3000/provider/" + this.provider.id)
         .then(() => {
+          store.alerts.pushAlert({
+            message: `Deleted provider: ${this.provider.name}`,
+            class: "alert-danger"
+          });
           this.$emit("reloadProviders");
           this.$emit("loadClients");
         });
