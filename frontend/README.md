@@ -8,6 +8,5 @@ First of all - install dependensies: `npm install`
 
 Then:
 
-- Run in dev mode: `npm run dev`
+- Run in dev mode: `npm run serve`
 - Build production version: `npm run build`
-- Start local example with builded production version: `npm start`

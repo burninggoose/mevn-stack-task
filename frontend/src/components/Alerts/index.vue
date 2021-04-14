@@ -5,7 +5,7 @@
         v-for="alert in alerts.array"
         v-bind:key="alert.id"
         :alert="alert"
-        @pullAlert="pullAlert"
+        :pullAlert="pullAlert"
       />
     </div>
   </div>
